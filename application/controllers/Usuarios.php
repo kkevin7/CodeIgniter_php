@@ -13,7 +13,9 @@ class Usuarios extends CI_Controller {
     {
         $datos['titulo'] = 'Controlador de Usuarios';
         //Cargando la vista
+        $this->load->view('include/header');
         $this->load->view('usuarios/index', $datos);
+        $this->load->view('include/footer');
     }
 
     //Metodo para cargar los datos

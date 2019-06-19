@@ -6,8 +6,8 @@ foreach ($usuarios as $usuario){
         <td><?= $usuario->nombre  ?></td>
         <td><?= $usuario->apellido  ?></td>
         <td>
-            <button type="submit">Editar</button>
-            <button type="submit">Eliminar</button>
+            <button type="submit" class="waves-effect waves-light btn amber darken-3 ">Editar</button>
+            <button type="submit" class="waves-effect waves-light btn deep-orange darken-2 btn_eliminar ">Eliminar</button>
         </td>
     </tr>
     <?php
