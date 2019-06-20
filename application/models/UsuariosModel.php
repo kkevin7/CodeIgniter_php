@@ -7,4 +7,10 @@ class UsuariosModel extends CI_Model
     public function getAll(){
         return $this->db->get('usuarios')->result();
     }
+
+    //post
+    public function ingresar($datos){
+        $sql = "INSERT INTO usuarios(nombre,apellido) VALUES (?,?)";
+        $this->db->query($sql,$datos);
+    }
 }

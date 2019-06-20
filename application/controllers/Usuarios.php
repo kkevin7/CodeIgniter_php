@@ -24,4 +24,10 @@ class Usuarios extends CI_Controller {
         //renderizando la vista
         $this->load->view('usuarios/tabla',$data);
     }
+
+    //Metodo para registrar
+    public function ingresar(){
+        $data = [$_POST['nombre'],$_POST['apellido']];
+        $this->UsuariosModel->ingresar($data);
+    }
 }
