@@ -27,7 +27,38 @@ class Usuarios extends CI_Controller {
 
     //Metodo para registrar
     public function ingresar(){
-        $data = [$_POST['nombre'],$_POST['apellido']];
-        $this->UsuariosModel->ingresar($data);
+        //$data = [$_POST['nombre'],$_POST['apellido']];
+        $datos=[
+            'nombre'=> $_POST['nombre'],
+            'apellido'=>$_POST['apellido']
+        ];
+        $this->UsuariosModel->create($datos);
     }
+
+    //metodo delete
+    public function delete($id){
+        //Llamar al metood delete de mi formulario
+        $this->UsuariosModel->delete($id);
+    }
+
+    public function getById($id){
+        //obteniendo el registro de la db
+        $data=[
+            'usuario'=>$this->UsuariosModel->getById($id)
+        ];
+        //enviandoel registro a la base de datos
+        $this->load->view('usuarios/form',$data);
+    }
+
+    //metodo update
+    public function editar(){
+        //$data = [$_POST['nombre'],$_POST['apellido'],$_POST['id']];
+        $datos=[
+            'nombre'=> $_POST['nombre'],
+            'apellido'=>$_POST['apellido'],
+            'id_Usuario'=>$_POST['id']
+        ];
+        $this->UsuariosModel->update($datos);
+    }
+
 }

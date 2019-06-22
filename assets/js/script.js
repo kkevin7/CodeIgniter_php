@@ -15,7 +15,7 @@ function recargar() {
 
 //controlador de eventos
 function asignarEventos() {
-    document.getElementById('btn_create').addEventListener('click', accion );
+    document.getElementById('btn').addEventListener('click', accion );
     var btnEdit= document.getElementsByClassName('btn_edit');
     var btnDelete= document.getElementsByClassName('btn_delete');
 
@@ -27,6 +27,7 @@ function asignarEventos() {
 }
 
 function accion() {
+    var id= document.getElementById('id_usuario').value;
     var nombre = document.getElementById('txtNombre').value;
     var apellido = document.getElementById('txtApellido').value;
     console.log(apellido);
@@ -41,20 +42,47 @@ function accion() {
                 document.getElementById('cuerpo').innerHTML = this.responseText;
                 recargar();
                 limpiar();
+                document.getElementById('btn').value="ingresar";
+                document.getElementById('btn').innerHTML="Agregar";
             }
         };
-        peticion.open('POST', 'usuarios/ingresar');
+        var datos = 'nombre=' + nombre + '&apellido=' + apellido;
+        if(this.value == "editar"){
+            datos+= "&id="+id;
+        }
+
+        peticion.open('POST', 'usuarios/'+this.value);
         peticion.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        peticion.send('nombre=' + nombre + '&apellido=' + apellido);
+        peticion.send(datos);
     }
 }
 
 function actualizar() {
-    alert('Boton actualizar');
+    var peticion = new XMLHttpRequest();
+    peticion.onreadystatechange=function () {
+        if (this.readyState== 4){
+            document.getElementById('frm').innerHTML=this.responseText;
+            recargar();
+        }
+    };
+    peticion.open('GET', 'usuarios/getById/'+this.value);
+    peticion.send();
 }
 
 function eliminar() {
-    alert('Boton eliminar');
+    const confirm = window.confirm("¿Deseas eliminar el registro?");
+
+    if (confirm) {
+        var peticion = new XMLHttpRequest();
+        peticion.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                document.getElementById('cuerpo').innerHTML = this.responseText;
+                recargar();
+            }
+        };
+        peticion.open('DELETE', 'usuarios/delete/' + this.value);
+        peticion.send();
+    }
 }
 
 function limpiar() {

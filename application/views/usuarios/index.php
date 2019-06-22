@@ -15,7 +15,7 @@
                     <input type="text" id="txtApellido" placeholder="Apellidos" class="validate"  required >
                     <label for="txtApellido">Apellidos</label>
                 </div>
-                <button class="waves-effect waves-light btn" type="button" id="btn_create">Submit
+                <button class="waves-effect waves-light btn" type="button" id="btn" value="ingresar">Submit
                     <i class="material-icons right">send</i>
                 </button>
         </form>
